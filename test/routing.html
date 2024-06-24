@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routing</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
+
+    <style>
+      #map {
+        height: 75vh;
+        width: 75vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="nap"></div>
+    <button id="sbmtbtn">Calculate</button>
+    
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <script>
+      const sbmtbtn = document.getElementById("sbmtbtn");
+      let map = L.map("map").setView([22.5744, 88.3629], 10);
+      let nap = document.getElementById("nap");
+
+      const tileLayer = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }
+      ).addTo(map);
+
+      const loc1 = L.Control.geocoder().addTo(map);
+      const loc2 = L.Control.geocoder().addTo(map);
+      const loc3=L.Control.geocoder()
+      console.log("L.control.geoCoder() for loc3: ", loc3)
+
+
+      let place1 = "";
+      let place2 = "";
+
+      console.log(loc1);
+      console.log(loc1._lastGeocode);
+      loc1.on("markgeocode", (e) => {
+        console.log("geocode mark: ", e);
+        place1 = e.target._lastGeocode;
+      });
+
+      loc2.on("markgeocode", (e) => {
+        console.log("geocode mark: ", e);
+        place2 = e.target._lastGeocode;
+      });
+
+      sbmtbtn.addEventListener("click", () => {
+        console.log("started and loc2: ", loc2);
+        const distance=L.Routing.control({
+          waypoints: [
+            L.latLng(
+              loc1._geocodeMarker._latlng.lat,
+              loc1._geocodeMarker._latlng.lng
+            ),
+            L.latLng(
+              loc2._geocodeMarker._latlng.lat,
+              loc2._geocodeMarker._latlng.lng
+            ),
+          ],
+        }).addTo(map);
+        console.log("distance: ", distance)
+      });
+    </script>
+  </body>
+</html>

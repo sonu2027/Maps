@@ -1,0 +1,42 @@
+    // let marker = L.marker(location).addTo(mapRef.current);
+    // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+    // const circle = L.circle([mapRef.current._lastCenter.lat, mapRef.current._lastCenter.lng], {
+    //     color: 'red',
+    //     fillColor: '#f03',
+    //     fillOpacity: 0.5,
+    //     radius: 500
+    // }).addTo(mapRef.current);
+
+    // const polygon = L.polygon([
+    //     [22.5744, 88.3629],
+    //     [51.503, -0.06],
+    //     [51.51, -0.047]
+    // ]).addTo(mapRef.current);
+
+    // circle.bindPopup("I am a circle.");
+    // polygon.bindPopup("I am a polygon.");
+
+
+
+
+
+
+
+const onMapClick = (e) => {
+        console.log("event: ", e);
+        const popup = L.popup()
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng)
+            .openOn(mapRef.current);
+
+        const marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mapRef.current)
+
+    };
+
+     useEffect(() => {
+        if (mapRef.current) {
+            mapRef.current.on('click', onMapClick); // Add click event listener
+        }
+    }, []);

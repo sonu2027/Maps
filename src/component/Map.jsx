@@ -55,46 +55,52 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
     }
 
     const showRoute = async () => {
-        console.log("I am ");
-        const route = L.Routing.control({
-            waypoints: [
-                L.latLng(
-                    loc1.current._geocodeMarker._latlng.lat,
-                    loc1.current._geocodeMarker._latlng.lng
-                ),
-                L.latLng(
-                    loc2.current._geocodeMarker._latlng.lat,
-                    loc2.current._geocodeMarker._latlng.lng
-                ),
-            ],
-        }).addTo(mapRef.current);
-        console.log("distance: ", route)
-
-        const remove1 = document.getElementsByClassName("leaflet-routing-alternatives-container")
-        console.log("Total remove si: ", remove1);
-        const remove2 = document.getElementsByClassName("leaflet-routing-container")
-        remove2[0].style.display = "none"
-        console.log("remove2 is: ", remove2);
-
-        for (let i = 0; i < remove2.length; i++) {
-            remove2[i].style.display = "none"
-            remove2[i].style.height = "0"
-            remove2[i].style.width = "0"
+        if (origin == "" || dest == "") {
+            alert("Please, enter both the location")
         }
+        else {
+            console.log("I am ");
+            const route = L.Routing.control({
+                waypoints: [
+                    L.latLng(
+                        loc1.current._geocodeMarker._latlng.lat,
+                        loc1.current._geocodeMarker._latlng.lng
+                    ),
+                    L.latLng(
+                        loc2.current._geocodeMarker._latlng.lat,
+                        loc2.current._geocodeMarker._latlng.lng
+                    ),
+                ],
+            }).addTo(mapRef.current);
+            console.log("distance: ", route)
 
-        for (let i = 0; i < remove1.length; i++) {
-            remove1[i].style.display = "none"
-            remove1[i].style.height = "0"
-            remove1[i].style.width = "0"
-        }
+            const remove1 = document.getElementsByClassName("leaflet-routing-alternatives-container")
+            console.log("Total remove si: ", remove1);
+            const remove2 = document.getElementsByClassName("leaflet-routing-container")
+            remove2[0].style.display = "none"
+            console.log("remove2 is: ", remove2);
 
-        setTimeout(() => {
-            if (route._selectedRoute && route._selectedRoute.summary) {
-                setDistance(route._selectedRoute.summary.totalDistance)
-            } else {
-                console.log("route not found");
+            for (let i = 0; i < remove2.length; i++) {
+                remove2[i].style.display = "none"
+                remove2[i].style.height = "0"
+                remove2[i].style.width = "0"
             }
-        }, 3000)
+
+            for (let i = 0; i < remove1.length; i++) {
+                remove1[i].style.display = "none"
+                remove1[i].style.height = "0"
+                remove1[i].style.width = "0"
+            }
+
+            setTimeout(() => {
+                if (route._selectedRoute && route._selectedRoute.summary) {
+                    setDistance(route._selectedRoute.summary.totalDistance)
+                } else {
+                    console.log("route not found");
+                    alert("Route not found, try to search for another location")
+                }
+            }, 5000)
+        }
     }
 
     const setLoc1 = () => {

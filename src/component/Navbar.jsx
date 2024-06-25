@@ -3,12 +3,10 @@ import gravitiLogo from "../assets/gravitiLogo.svg"
 
 function Navbar() {
   return (
-    <div className='bg-white hidden md:block'>
+    <div className='bg-white hidden sm:block'>
       <img className='pl-10 py-1' src={gravitiLogo} alt="Graviti Logo" />
     </div>
   )
 }
-
-// background: #F4F8FA;
 
 export default Navbar

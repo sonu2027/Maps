@@ -132,85 +132,63 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
         geocoderIcon[0].style.display = "none"
         geocoderIcon[1].style.display = "none"
 
-        const mediaQuery = window.matchMedia("(max-width: 1024px)");
-        const mediaQuery2 = window.matchMedia("(max-width: 768px)");
+        const mediaQuery2 = window.matchMedia("(max-width: 1800px)");
         const mediaQuery3 = window.matchMedia("(max-width: 640px)");
 
-        function handleMediaQueryChange(e) {
-            console.log("e is: ", e);
-            if (e.matches) {
-                // The viewport is 600px or less
-                console.log("Media Query Matched! Viewport is 600px or less");
+        function handleMediaQueryChange() {
+
+            if (mediaQuery3.matches) {
+                console.log("Media Query Matched! Viewport is 640px or less");
+
                 inputTag[0].style.position = "fixed"
-                inputTag[0].style.left = "6.5rem"
-                inputTag[0].style.marginTop = "2rem"
-                inputTag[0].style.width = "9rem"
-                // inputTag[0].style.border="none"
+                inputTag[0].style.left = "2.3rem"
+                inputTag[0].style.top = "16rem"
+                inputTag[0].style.width = "88vw"
+                inputTag[0].style.border = "none"
+                inputTag[0].style.display = "flex"
+                inputTag[0].style.flexDirection = "column"
+                inputTag[0].style.justifyContent = "center"
+                inputTag[0].style.alignItems = "start"
 
                 inputTag[1].style.position = "fixed"
-                inputTag[1].style.left = "6.5rem"
-                inputTag[1].style.marginTop = "8rem"
-                inputTag[1].style.width = "9rem"
-            } else {
-                // The viewport is more than 600px
-                console.log("Media Query Not Matched! Viewport is more than 600px");
+                inputTag[1].style.left = "2.3rem"
+                inputTag[1].style.top = "21rem"
+                inputTag[1].style.width = "88vw"
+                inputTag[1].style.border = "none"
+                inputTag[1].style.display = "flex"
+                inputTag[1].style.flexDirection = "column"
+                inputTag[1].style.justifyContent = "center"
+                inputTag[1].style.alignItems = "start"
+
+            } else if (mediaQuery2.matches) {
+                console.log("Media Query Matched! Viewport is 768px or less");
+
                 inputTag[0].style.position = "fixed"
-                inputTag[0].style.left = "9rem"
-                inputTag[0].style.marginTop = "2rem"
-                inputTag[0].style.width = "12.5rem"
-                // inputTag[0].style.border="none"
+                inputTag[0].style.left = "5.9rem"
+                inputTag[0].style.top = "11rem"
+                inputTag[0].style.width = "25vw"
+                inputTag[0].style.border = "none"
+                inputTag[0].style.display = "flex"
+                inputTag[0].style.justifyContent = "start"
+                inputTag[0].style.alignItems = "center"
 
                 inputTag[1].style.position = "fixed"
-                inputTag[1].style.left = "9rem"
-                inputTag[1].style.marginTop = "8rem"
-                inputTag[1].style.width = "12.5rem"
-                // inputTag[1].style.border="none"
+                inputTag[1].style.left = "5.9rem"
+                inputTag[1].style.top = "16rem"
+                inputTag[1].style.width = "25vw"
+                inputTag[1].style.border = "none"
+                inputTag[1].style.display = "flex"
+                inputTag[1].style.justifyContent = "start"
+                inputTag[1].style.alignItems = "center"
             }
         }
 
-        function handleMediaQueryChange2(e) {
-            console.log("e is: ", e);
-            if (e.matches) {
-                // The viewport is 600px or less
-                console.log("Media Query Matched! Viewport is 600px or less");
-                inputTag[0].style.position = "fixed"
-                inputTag[0].style.left = "4.6rem"
-                inputTag[0].style.marginTop = "2rem"
-                inputTag[0].style.width = "7.5rem"
-                // inputTag[0].style.border="none"
-
-                inputTag[1].style.position = "fixed"
-                inputTag[1].style.left = "4.6rem"
-                inputTag[1].style.marginTop = "8rem"
-                inputTag[1].style.width = "7.5rem"
-            } 
-        }
-
-        function handleMediaQueryChange3(e) {
-            console.log("e is: ", e);
-            if (e.matches) {
-                // The viewport is 600px or less
-                console.log("Media Query Matched! Viewport is 600px or less");
-                inputTag[0].style.position = "fixed"
-                inputTag[0].style.left = "8.5rem"
-                inputTag[0].style.marginTop = "18.5rem"
-                inputTag[0].style.width = "18rem"
-                // inputTag[0].style.border="none"
-
-                inputTag[1].style.position = "fixed"
-                inputTag[1].style.left = "4.6rem"
-                inputTag[1].style.marginTop = "26rem"
-                inputTag[1].style.width = "15rem"
-            } 
-        }
-
         // Initial check
-        handleMediaQueryChange(mediaQuery);
+        handleMediaQueryChange();
 
-        // Listen for changes
-        mediaQuery.addEventListener("change", handleMediaQueryChange);
-        mediaQuery2.addEventListener("change", handleMediaQueryChange2);
-        mediaQuery3.addEventListener("change", handleMediaQueryChange3);
+        mediaQuery2.addEventListener("change", handleMediaQueryChange);
+        mediaQuery3.addEventListener("change", handleMediaQueryChange);
+
     }
 
     useEffect(() => {
@@ -236,13 +214,13 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
             .catch(() => {
 
             })
-    }, []); // Empty dependency array ensures this runs once after the component mounts
+    }, []);
 
 
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <div className='lg:h-96 lg:w-96 md:h-80 md:w-80 sm:h-72 sm:w-72 w-screen h-56 mr-0 border-2 border-solid border-red-500' id="map"></div>
-            <div onClick={showRoute} id='sbmtbtn'>
+        < div>
+            <div className='h-56 w-screen sm:w-2/5 sm:h-96 fixed top-0 sm:top-40 sm:right-10' id="map"></div>
+            <div className='w-screen fixed top-96 sm:top-52 sm:right-6 mt-5 flex justify-center items-center' onClick={showRoute} id='sbmtbtn'>
                 <Button />
             </div>
         </div>

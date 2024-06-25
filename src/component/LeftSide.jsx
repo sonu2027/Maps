@@ -8,14 +8,18 @@ import Button from './Button.jsx'
 
 function LeftSide({ distance, origin, dest, setDistance, setOrigin, setDest }) {
   return (
-    <div className='flex'>
-      <div className='flex flex-col gap-y-2 sm:gap-y-5'>
-        <Input text="Origin" logo={originLogo} />
-        {/* <Stop/> */}
-        <Input text="Destination" logo={destinationLogo} />
-        <Distance distance={distance} origin={origin} dest={dest} setDistance={setDistance} setOrigin={setOrigin} setDest={setDest}/>
+    <div >
+      <div >
+        <div className='fixed top-60 sm:top-40 sm:left-14 w-screen px-2 sm:w-2/6'>
+          <Input text="Origin" logo={originLogo} />
+        </div>
+        <div className='fixed top-80 sm:top-60 sm:left-14 w-screen px-2 sm:w-2/6'>
+          <Input text="Destination" logo={destinationLogo} />
+        </div>
+        <div className='fixed top-96 sm:top-72 sm:left-14 mt-24 w-screen px-2 sm:w-2/5'>
+          <Distance distance={distance} origin={origin} dest={dest} setDistance={setDistance} setOrigin={setOrigin} setDest={setDest} />
+        </div>
       </div>
-      {/* <Button distance={distance} origin={origin} dest={dest} setDistance={setDistance} setOrigin={setOrigin} setDest={setDest}/> */}
     </div>
   )
 }

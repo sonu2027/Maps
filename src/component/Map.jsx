@@ -149,6 +149,7 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                 inputTag[0].style.flexDirection = "column"
                 inputTag[0].style.justifyContent = "center"
                 inputTag[0].style.alignItems = "start"
+                inputTag[0].style.zIndex = "1000"
 
                 inputTag[1].style.position = "fixed"
                 inputTag[1].style.left = "2.3rem"
@@ -159,6 +160,7 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                 inputTag[1].style.flexDirection = "column"
                 inputTag[1].style.justifyContent = "center"
                 inputTag[1].style.alignItems = "start"
+                inputTag[1].style.zIndex = "999"
 
             } else if (mediaQuery2.matches) {
                 console.log("Media Query Matched! Viewport is 768px or less");
@@ -169,8 +171,10 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                 inputTag[0].style.width = "25vw"
                 inputTag[0].style.border = "none"
                 inputTag[0].style.display = "flex"
-                inputTag[0].style.justifyContent = "start"
-                inputTag[0].style.alignItems = "center"
+                inputTag[0].style.flexDirection = "column"
+                inputTag[0].style.justifyContent = "center"
+                inputTag[0].style.alignItems = "start"
+                inputTag[0].style.zIndex = "1000"
 
                 inputTag[1].style.position = "fixed"
                 inputTag[1].style.left = "5.9rem"
@@ -178,8 +182,10 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                 inputTag[1].style.width = "25vw"
                 inputTag[1].style.border = "none"
                 inputTag[1].style.display = "flex"
-                inputTag[1].style.justifyContent = "start"
-                inputTag[1].style.alignItems = "center"
+                inputTag[1].style.flexDirection = "column"
+                inputTag[1].style.justifyContent = "center"
+                inputTag[1].style.alignItems = "start"
+                inputTag[1].style.zIndex = "999"
             }
         }
 

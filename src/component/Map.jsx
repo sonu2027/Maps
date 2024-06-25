@@ -220,6 +220,8 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
 
     useEffect(() => {
 
+        alert("Important points to note: Location marker is not showing in production but in my local machine it is showing")
+
         getLocation()
             .then((location) => {
                 if (!mapRef.current) {

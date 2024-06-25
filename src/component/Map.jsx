@@ -17,6 +17,7 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
     let mapRef = useRef(null);
     let loc1 = useRef(null);
     let loc2 = useRef(null)
+    const [routes, setRoutes] = useState(null)
 
     const getLocation = async () => {
         return new Promise((resolve, reject) => {
@@ -54,11 +55,24 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
         marker.bindPopup("<b>Current location</b>").openPopup();
     }
 
+    const disconnectRoute = () => {
+        if (routes) {
+            console.log("route started disconnecting");
+            mapRef.current.removeControl(routes);
+            setRoutes(null);
+            setDistance("");
+        } else {
+            console.log("No route to disconnect.");
+        }
+    };
+
     const showRoute = async () => {
+        console.log("route is: ", routes);
         if (origin == "" || dest == "") {
             alert("Please, enter both the location")
         }
         else {
+            disconnectRoute()
             console.log("I am ");
             const route = L.Routing.control({
                 waypoints: [
@@ -72,6 +86,7 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                     ),
                 ],
             }).addTo(mapRef.current);
+            setRoutes(route)
             console.log("distance: ", route)
 
             const remove1 = document.getElementsByClassName("leaflet-routing-alternatives-container")

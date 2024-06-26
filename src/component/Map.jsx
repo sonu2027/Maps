@@ -153,12 +153,12 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
         geocoderIcon[0].style.display = "none"
         geocoderIcon[1].style.display = "none"
 
-        const mediaQuery2 = window.matchMedia("(max-width: 1800px)");
-        const mediaQuery3 = window.matchMedia("(max-width: 640px)");
+        const mediaQuery1 = window.matchMedia("(max-width: 1800px)");
+        const mediaQuery2 = window.matchMedia("(max-width: 640px)");
 
         function handleMediaQueryChange() {
 
-            if (mediaQuery3.matches) {
+            if (mediaQuery2.matches) {
                 console.log("Media Query Matched! Viewport is 640px or less");
 
                 inputTag[0].style.position = "fixed"
@@ -183,7 +183,7 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
                 inputTag[1].style.alignItems = "start"
                 inputTag[1].style.zIndex = "999"
 
-            } else if (mediaQuery2.matches) {
+            } else if (mediaQuery1.matches) {
                 console.log("Media Query Matched! Viewport is 768px or less");
 
                 inputTag[0].style.position = "fixed"
@@ -213,14 +213,14 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
         // Initial check
         handleMediaQueryChange();
 
+        mediaQuery1.addEventListener("change", handleMediaQueryChange);
         mediaQuery2.addEventListener("change", handleMediaQueryChange);
-        mediaQuery3.addEventListener("change", handleMediaQueryChange);
 
     }
 
     useEffect(() => {
 
-        alert("Important points to note: Location marker is not showing in production but in my local machine it is showing")
+        // alert("Important points to note: Location marker is not showing in production but in my local machine it is showing")
 
         getLocation()
             .then((location) => {
@@ -240,8 +240,9 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
 
                 }
             })
-            .catch(() => {
-
+            .catch((error) => {
+                console.log("Not able to find your current location: ", error)
+                alert("Failed to fetch your current location")
             })
     }, []);
 
@@ -249,8 +250,8 @@ function Map({ distance, origin, dest, setDistance, setOrigin, setDest }) {
     return (
         < div>
             <div className='h-56 w-screen sm:w-2/5 sm:h-96 fixed top-0 sm:top-40 sm:right-10' id="map"></div>
-            <div className='w-screen fixed top-96 sm:top-52 sm:right-6 mt-5 flex justify-center items-center' onClick={showRoute} id='sbmtbtn'>
-                <Button />
+            <div className='w-screen fixed top-96 sm:top-52 sm:right-6 mt-5 flex justify-center items-center' id='sbmtbtn'>
+                <Button showRoute={showRoute} />
             </div>
         </div>
     )
